@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const methodOverride = require('method-override');
 
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'));
 
 //declaring an array of comments
 const comments = [
@@ -69,7 +71,6 @@ app.get('/comments/:id', (req, res) => {
 //route for editing a comment
 app.patch('/comments/:id', (req, res) => {
     let id = req.params.id;
-    console.log(req.body.comment);
     let comment = comments.find((c) => {
         return c.id === id;
     })
@@ -80,6 +81,19 @@ app.patch('/comments/:id', (req, res) => {
         res.send("we were unable to find comment with this id");
     }
 
+
+})
+
+app.get('/comments/edit/:id', (req, res) => {
+    let id = req.params.id;
+    let comment = comments.find((c) => {
+        return c.id === id;
+    })
+    if (comment) {
+        res.render('comments/edit', { comment });
+    } else {
+        res.send("some kind of error");
+    }
 
 })
 
