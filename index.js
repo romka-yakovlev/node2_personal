@@ -36,5 +36,5 @@ app.get('/comments', (req, res) => {
 })
 
 app.listen(3000, () => {
-    console.log("hey, I'm listening for requests");
+    console.log("hey, I'm listening for requests!");
 })
