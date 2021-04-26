@@ -37,13 +37,13 @@ app.get('/comments', (req, res) => {
     res.render('comments/index', { comments })
 })
 
-//create new comment
+//route to show form for creating a new comment
 app.get('/comments/new', (req, res) => {
     res.render('comments/new');
 })
 
+//route for creating a new comment
 app.post('/comments', (req, res) => {
-    console.log(req.body);
     let comment = {
         id: uuidv4(),
         username: req.body.username,
@@ -51,6 +51,19 @@ app.post('/comments', (req, res) => {
     }
     comments.push(comment);
     res.redirect('/comments');
+})
+
+//route to display a single comment
+app.get('/comments/:id', (req, res) => {
+    let id = req.params.id;
+    if (id) {
+        comment = comments.find((c) => {
+            return c.id === id;
+        })
+        res.render('comments/show', { comment });
+    } else {
+        res.send("There's no comment with such id");
+    }
 })
 
 app.listen(3000, () => {

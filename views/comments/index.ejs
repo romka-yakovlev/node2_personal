@@ -13,10 +13,12 @@
     <ul>
         <% for (comment of comments) { %>
             <li>
-                <%= comment.comment %> - <b>by <%= comment.username %> </b> <a href="#">Details</a>
+                <%= comment.comment %> - <b>by <%= comment.username %> </b> <a
+                        href="/comments/<%= comment.id %>">Details</a>
             </li>
             <% } %>
     </ul>
+    <a href="/comments/new">Create new comment</a>
 
 </body>
 
