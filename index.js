@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
+const path = require('path');
+
+app.use(express.urlencoded({ extended: true }))
 
 //declaring an array of comments
 const comments = [
@@ -29,10 +32,25 @@ app.get('/', (req, res) => {
 })
 
 //defining RESTful route
-//1. show route
-//SHOW THE HELL IS GOING ON HERE
+//1. show all comments route
 app.get('/comments', (req, res) => {
     res.render('comments/index', { comments })
+})
+
+//create new comment
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new');
+})
+
+app.post('/comments', (req, res) => {
+    console.log(req.body);
+    let comment = {
+        id: uuidv4(),
+        username: req.body.username,
+        comment: req.body.comment
+    }
+    comments.push(comment);
+    res.redirect('/comments');
 })
 
 app.listen(3000, () => {

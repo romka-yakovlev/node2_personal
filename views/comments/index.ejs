@@ -13,7 +13,7 @@
     <ul>
         <% for (comment of comments) { %>
             <li>
-                <%= comment.username %>
+                <%= comment.comment %> - <b>by <%= comment.username %> </b> <a href="#">Details</a>
             </li>
             <% } %>
     </ul>
