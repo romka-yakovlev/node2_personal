@@ -66,6 +66,23 @@ app.get('/comments/:id', (req, res) => {
     }
 })
 
+//route for editing a comment
+app.patch('/comments/:id', (req, res) => {
+    let id = req.params.id;
+    console.log(req.body.comment);
+    let comment = comments.find((c) => {
+        return c.id === id;
+    })
+    if (comment) {
+        comment.comment = req.body.comment;
+        res.redirect('/comments');
+    } else {
+        res.send("we were unable to find comment with this id");
+    }
+
+
+})
+
 app.listen(3000, () => {
     console.log("hey, I'm listening for requests!");
 })
