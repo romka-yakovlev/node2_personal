@@ -25,7 +25,14 @@ const comments = [
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.send("Hello, my name is Roman and this is my simple web page");
+    res.render('home');
+})
+
+//defining RESTful route
+//1. show route
+//SHOW THE HELL IS GOING ON HERE
+app.get('/comments', (req, res) => {
+    res.render('comments/index', { comments })
 })
 
 app.listen(3000, () => {
