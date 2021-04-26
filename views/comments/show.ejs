@@ -12,6 +12,11 @@
     <h2>
         <%= comment.username %> said <%= comment.comment %>
     </h2>
+    <a href="/comments/edit/<%= comment.id %> ">Edit this comment</a>
+    <form action="/comments/<%= comment.id %>?_method=DELETE" method="POST">
+        <button>Delete this post</button>
+    </form>
+    <br>
     <a href="/comments">Back to all comments page</a>
 </body>
 

@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 
 //declaring an array of comments
-const comments = [
+let comments = [
     {
         id: uuidv4(),
         username: "Roman",
@@ -84,6 +84,7 @@ app.patch('/comments/:id', (req, res) => {
 
 })
 
+//route for displaying the edit form
 app.get('/comments/edit/:id', (req, res) => {
     let id = req.params.id;
     let comment = comments.find((c) => {
@@ -95,6 +96,15 @@ app.get('/comments/edit/:id', (req, res) => {
         res.send("some kind of error");
     }
 
+})
+
+//delete route
+app.delete('/comments/:id', (req, res) => {
+    let id = req.params.id;
+    comments = comments.filter((c) => {
+        return c.id !== id;
+    })
+    res.redirect('/comments');
 })
 
 app.listen(3000, () => {
